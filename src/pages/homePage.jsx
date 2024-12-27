@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import './homePage.css';
 
 const HomePage = () => {
@@ -15,7 +16,7 @@ const HomePage = () => {
             <footer>
                 <p>&copy; 2024 Simple Home Page. All rights reserved.</p>
             </footer>
-
+            <Link to="/login">Login</Link>
             
         </div>
 
