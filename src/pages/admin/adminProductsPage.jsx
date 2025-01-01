@@ -25,7 +25,8 @@ export default function AdminProductsPage() {
         <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">
           Admin Products Page
         </h1>
-        <div className="overflow-x-auto">
+        {
+          productsLoaded?        <div className="overflow-x-auto">
           <table className="w-full border-collapse border border-gray-300 bg-white shadow-lg overflow-hidden text-ellipsis whitespace-nowrap">
             <thead className="bg-gray-200 text-gray-700">
               <tr>
@@ -85,7 +86,10 @@ export default function AdminProductsPage() {
               ))}
             </tbody>
           </table>
+        </div>:<div className="w-full h-full flex justify-center items-center">
+          <div className="w-[30px] h-[30px] border-[3px] border-slate-400 border-b-slate-600 animate-spin rounded-full"> </div>
         </div>
+        }
       </div>
     </div>
   );
