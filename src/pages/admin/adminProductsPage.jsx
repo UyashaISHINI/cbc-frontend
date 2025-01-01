@@ -1,18 +1,22 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { FaPlus, FaTrash } from "react-icons/fa";
 import { FaPencilAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 export default function AdminProductsPage() {
   const [products, setProducts] = useState([]);
+  const [productsLoaded,setProductsLoaded]=useState(false);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/api/products").then((res) => {
-      console.log(res.data);
-      setProducts(res.data);
-    });
-  }, []);
+    if(!productsLoaded){
+      axios.get("http://localhost:5000/api/products").then((res) => {
+        setProducts(res.data);
+        setProductsLoaded(true);
+      });
+    }
+  }, [productsLoaded]);
 
   return (
     <div className="min-h-screen bg-gray-100 p-6 relative">
@@ -58,7 +62,16 @@ export default function AdminProductsPage() {
                     <button className="text-red-500 hover:text-red-700"
                            title="Delete"
                            onClick={()=>{
-                           alert(product.productId)
+                           const token = localStorage.getItem("token");
+                           axios.delete(`http://localhost:5000/api/products/${product.productId}`,{
+                            headers:{
+                              Authorization:`Bearer ${token}`,
+                            },
+                           }).then((res)=>{
+                            console.log(res.data);
+                            toast.success("Product deleted successfully");
+                            setProductsLoaded(false);
+                           });
                            }}
                     >
                       <FaTrash />
@@ -77,4 +90,3 @@ export default function AdminProductsPage() {
     </div>
   );
 }
-
