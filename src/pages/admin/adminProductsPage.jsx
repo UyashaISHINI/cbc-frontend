@@ -55,10 +55,16 @@ export default function AdminProductsPage() {
                     {product.description}
                   </td>
                   <td className="porder border-gray-300 flex justify-center space-x-4">
-                    <button className="text-red-500 hover:text-red-700">
+                    <button className="text-red-500 hover:text-red-700"
+                           title="Delete"
+                           onClick={()=>{
+                           alert(product.productId)
+                           }}
+                    >
                       <FaTrash />
                     </button>
-                    <button className="text-blue-500 hover:text-blue-700">
+                    <button className="text-blue-500 hover:text-blue-700"
+                    >
                       <FaPencilAlt />
                     </button>
                   </td>
