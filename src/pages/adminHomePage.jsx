@@ -6,7 +6,7 @@ export default function AdminHomePage() {
     return (
         <div className="bg-slate-400 w-full h-screen flex">
             {/* Sidebar */}
-            <div className="w-[30%] h-screen bg-slate-600 flex flex-col items-center py-10">
+            <div className="w-[20%] h-screen bg-slate-600 flex flex-col items-center py-10">
                 <Link className="flex items-center gap-2 text-white text-lg mb-6 hover:text-slate-300" to="/admin/dashboard">
                     <BsGraphUp size={24} /> Dashboard
                 </Link>
@@ -21,7 +21,7 @@ export default function AdminHomePage() {
                 </Link>
             </div>
 
-            <div className="w-[70%] h-screen bg-red-300 flex justify-center items-center">
+            <div className="w-[80%] h-screen ">
             <Routes path="/*">
             <Route path ="/dashboard" element={<h1>Dashboard</h1>}/>
             <Route path ="/products" element={<AdminProductsPage/>}/>
