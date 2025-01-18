@@ -1,14 +1,17 @@
 import { useState } from "react"
+import uploadMediaToSupabase from "../utils/mediaUpload"
+
+
 
 export default function FileUploadTest(){
     const[file,setFile] = useState(null)
 
-    function handleUpload(){
-        if(file == null){
-            alert("Please select a file")
-            return
-        }
-        console.log(file)
+    async function handleUpload(){
+        uploadMediaToSupabase(file).then((url)=>{
+            console.log(url)
+        }).catch((err)=>{
+            console.log(err)
+        })
     }
     return (
         <div>
