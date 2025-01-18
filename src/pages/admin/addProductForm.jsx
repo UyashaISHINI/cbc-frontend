@@ -2,12 +2,13 @@ import axios from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import uploadMediaToSupabase from "../../utils/mediaUpload";
 
 export default function AddProductForm() {
   const [productId, setProductId] = useState("");
   const [productName, setProductName] = useState("");
   const [alternativeNames, setAlternativeNames] = useState("");
-  const [imageURLs, setImageURLs] = useState("");
+  const [imageFiles, setImageFiles] = useState([]);
   const [price, setPrice] = useState("");
   const [lastPrice, setLastPrice] = useState("");
   const [stock, setStock] = useState("");
@@ -15,34 +16,46 @@ export default function AddProductForm() {
 
   const navigate = useNavigate()
 
-  async function handleSubmit(){
+  async function handleSubmit() {
     const altNames = alternativeNames.split(",")
-    const imgUrls = imageURLs.split(",")
+
+    const promisesArray = []
+    for (let i = 0; i < imageFiles.length; i++) {
+      promisesArray[i] = await uploadMediaToSupabase(imageFiles[i])
+    }
+    const imgUrls = await Promise.all(promisesArray)
 
     const product = {
-        productId : productId,
-        productName : productName,
-        altNames : altNames,
-        images : imgUrls,
-        price : price,
-        lastPrice : lastPrice,
-        stock : stock,
-        description : description
+      productId: productId,
+      productName: productName,
+      altNames: altNames,
+      images: imgUrls,
+      price: price,
+      lastPrice: lastPrice,
+      stock: stock,
+      description: description
     }
 
     const token = localStorage.getItem("token")
 
-    try{
-    await  axios.post("http://localhost:5000/api/products",product,{
-        headers : {
-            Authorization : "Bearer "+token
-        }
-    })
-    navigate("/admin/products")
-    toast.success("Product added successfully")
-    }catch(err){
-        toast.error("Failed to add product")
-    }
+      try {
+        await axios.post("http://localhost:5000/api/products/", product, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+        
+        navigate("/admin/products");
+      
+        toast.success("Product added successfully");
+      } catch (err) {
+        console.error("Error adding product: ", err);
+        
+        // Handle errors properly
+        toast.error(
+          err.response?.data?.message || "Failed to add product. Please try again."
+        );
+      }
 
   }
 
@@ -101,11 +114,13 @@ export default function AddProductForm() {
               Image URLs
             </label>
             <input
-              type="text"
+              type="file"
               placeholder="Enter Image URLs"
               className="w-full border border-slate-300 rounded-md px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-slate-500 focus:border-slate-500"
-              value={imageURLs}
-              onChange={(e) => setImageURLs(e.target.value)}
+              onChange={(e) => {
+                setImageFiles(e.target.files)
+              }}
+              multiple
             />
           </div>
 
