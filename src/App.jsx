@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import './App.css'
 import ProductCard from './components/productCard'
-import UserData from './components/UserData'
 import LoginPage from './pages/loginPage'
 import HomePage from './pages/homePage'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
@@ -13,7 +12,7 @@ function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <div className='bg-secondary'>
+    <div className='bg-primary'>
     <BrowserRouter>
 
     <Toaster position='top-right'/>
