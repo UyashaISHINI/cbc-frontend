@@ -13,7 +13,7 @@ function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <>
+    <div className='bg-secondary'>
     <BrowserRouter>
 
     <Toaster position='top-right'/>
@@ -26,7 +26,7 @@ function App() {
     <Route path ="/*"element={<HomePage/>}/>
     </Routes>
     </BrowserRouter>       
-    </>
+    </div>
   )
 }
 
