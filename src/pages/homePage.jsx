@@ -1,4 +1,5 @@
 import { Link, Routes } from 'react-router-dom';
+import Header from '../components/header';
 
 const HomePage = () => {
     return (
