@@ -2,7 +2,9 @@ import { createClient } from "@supabase/supabase-js";
 
 const key = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNtZXVucmRjbmdpaXVjbm9ocXBvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzcxNzMzNjgsImV4cCI6MjA1Mjc0OTM2OH0.Rb_m44fagfxN2axK2NnV9o7ZDOVXnWR_8nAeEMKWEHE`
 
-const url = "https://smeunrdcngiiucnohqpo.supabase.co"
+const url = "https://smeunrdcngiiucnohqpo.supabase.co";
+
+const supabase = createClient(url, key)
 
 export default function uploadMediaToSupabase(file) {
 
@@ -12,7 +14,6 @@ export default function uploadMediaToSupabase(file) {
         }
         let fileName = file.name;
         const extension = fileName.split(".")[fileName.split(".").length - 1]
-        const supabase = createClient(url, key)
 
         const timestamp = new Date().getTime()
 
