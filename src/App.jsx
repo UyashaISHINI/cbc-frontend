@@ -13,18 +13,18 @@ function App() {
 
   return (
     <div className='bg-primary'>
-    <BrowserRouter>
+      <BrowserRouter>
 
-    <Toaster position='top-right'/>
+        <Toaster position='top-right' />
 
-    <Routes path="/*">
-    <Route path ="/" element={<HomePage/>}/>
-    <Route path ="/login" element={<LoginPage/>}/>
-    <Route path = "/signUp" element={<SignUpPage/>}/>
-    <Route path = "/admin/*" element={<AdminHomePage/>}/>
-    <Route path ="/*"element={<HomePage/>}/>
-    </Routes>
-    </BrowserRouter>       
+        <Routes path="/*">
+          <Route path="/" element={<HomePage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signUp" element={<SignUpPage />} />
+          <Route path="/admin/*" element={<AdminHomePage />} />
+          <Route path="/*" element={<HomePage />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   )
 }

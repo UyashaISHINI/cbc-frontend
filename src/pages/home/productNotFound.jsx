@@ -1,4 +1,4 @@
-export default function productNotFound(){
+export default function ProductNotFound(){
     return( 
         <div className="w-full h-full flex flex-col items-center justify-center">
           <h1 className="text-4xl font-bold text-gray-800">Product Not Found</h1>
