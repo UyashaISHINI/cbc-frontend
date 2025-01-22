@@ -9,7 +9,6 @@ const HomePage = () => {
             <Header />
             <div className='w-full h-[calc(100vh-100px)]'>
                 <Routes>
-                {/* why do you want path for Routers? */}
                     <Route path="/" element={<h1>Home Page</h1>} />
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/productInfo/:id" element={<ProductOverview />} />

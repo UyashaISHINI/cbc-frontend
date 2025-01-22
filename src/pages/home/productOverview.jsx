@@ -3,22 +3,25 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ProductNotFound from "./productNotFound";
 
+export const backend = import.meta.env.VITE_BACKEND_URL;
+
 export default function ProductOverview(){
     const params = useParams();
-    console.log(params);
-    // const productId = params.id;
-    // const [product,setProduct] = useState(null)
+    const productId = params.id;
+    const [product,setProduct] = useState(null)
     // const [status,setStatus] = useState("loading")
-    // useEffect(
-    //      ()=>{
-    //         axios.get(import.meta.env.VITE_BACKGEND_URL+"/api/products/"+productId).
-    //         then((res)=>{
-    //             console.log(res.data)
+    useEffect(
+         ()=>{
+            console.log(productId)
+            axios.get(backend + "/api/products/"+productId).
+             then((res)=>{
+                 console.log(res.data)
     //             // if(res.data == null){
     //             //     setStatus("not-found")
     //             // }
-    //         })
-    //     },[])
+             })
+            }
+        ,[])
     return(
         <div className="w-full h-[calc(100hv-100px)]">
             {/* {
@@ -39,7 +42,7 @@ export default function ProductOverview(){
                         Product Found
                     </div>
                 )
-            } */}<h1>Product ProductOverview</h1>
+            } */}<h1>Product Overview</h1>
         </div>
     );
 } 
