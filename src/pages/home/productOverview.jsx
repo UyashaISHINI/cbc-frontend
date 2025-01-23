@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ProductNotFound from "./productNotFound";
 import ImageSlider from "../../components/imageSlider";
+import { addToCart, clearCart } from "../../utils/cartFunction";
+import toast from "react-hot-toast";
 
 export const backend = import.meta.env.VITE_BACKEND_URL;
 
@@ -27,6 +29,10 @@ export default function ProductOverview() {
                 }
             });
     }, []);
+    function onAddtoCartClick(){
+        addToCart(product.productId,1)
+        toast.success(product.productId+" Added to cart")
+    }
 
     return (
         <div className="w-full h-[calc(100vh-80px)]">
@@ -54,6 +60,7 @@ export default function ProductOverview() {
                             <p className="text-xl text-accent">{(product.price>product.lastPrice)&&<span className="line-through text-red-500">LKR{product.price}</span>
                             }<span>{"LKR"+product.lastPrice}</span></p>
                             <p className="text-xl text-accent line-clamp-3">{product.description}</p>
+                            <button onClick={onAddtoCartClick} className="bg-secondary text-accent p-2 rounded-lg">Add to cart</button>
                         </div>
 
                     </div>

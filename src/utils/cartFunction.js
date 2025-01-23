@@ -9,7 +9,7 @@ export function loadCart(){
 export function addToCart(productId,qty){
     const cart = loadCart()
     const index = cart.findIndex((item)=>{
-        item.productId==productId
+        return item.productId==productId
     })
     if(index==-1){
         cart.push({productId,qty})
@@ -26,4 +26,8 @@ export function addToCart(productId,qty){
 
 export function saveCart(cart){
     localStorage.setItem("cart",JSON.stringify(cart))
+}
+
+export function clearCart(){
+    localStorage.removeItem("cart")
 }
