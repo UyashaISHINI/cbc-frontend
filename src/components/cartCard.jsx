@@ -28,7 +28,8 @@ export default function CartCard(props){
         },[]
     )
 
-    return(
+    return(<table>
+       
         <tr className="hover:bg-light-secondary hover:text-white cursor-pointer">
             <td className="">
             <img src={product?.images[0]} className="w-[90px] h-[90px] object-cover mx-auto"/>
@@ -39,5 +40,7 @@ export default function CartCard(props){
             <td className="text-center">LKR. {product?.lastPrice.toFixed(2)}</td>
             <td className="text-center">{(product?.lastPrice*qty).toFixed(2)}</td>
         </tr>
+       
+        </table>
     )
 }
