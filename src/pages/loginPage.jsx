@@ -9,6 +9,21 @@ export default function LoginPage() {
     const googleLogin = useGoogleLogin({
         onSuccess : (res)=>{
             console.log(res)
+            axios.post(import.meta.env.VITE_BACKEND_URL+"/api/users/google",{
+                token : res.access_token
+            }).then((res)=>{
+                if(res.data.message == "User created")
+                {
+                    toast.success("Your account is created now you can login via google")
+                }else{
+                    localStorage.setItem("token",res.data.token)
+                    if(res.data.user.type == "admin"){
+                        window.location.href = "/admin"
+                    }else{
+                        window.location.href = "/"
+                    }
+                }
+            })
         },
         onError: (error) => {
             console.error('Google Login Error:', error);
