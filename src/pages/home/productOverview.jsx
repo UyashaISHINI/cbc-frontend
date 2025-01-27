@@ -50,14 +50,17 @@ export default function ProductOverview() {
             }
             {
                 status === "found" && (
-                    <div className="w-full h-full flex items-center justify-center">
-                       <div className="w-[35%] h-full">
+                    <div className="w-full h-full flex flex-col lg:flex-row items-center justify-center">
+                        <h1 className="text-3xl font-bold text-accent lg:hidden">{product.productName}</h1>
+                        <p className="text-xl text-accent lg:hidden">{(product.price>product.lastPrice)&&<span className="line-through text-red-500">LKR{product.price}</span>
+                            }<span>{"LKR"+product.lastPrice}</span></p>
+                       <div className="w-[100%] lg:w-[35%] lg:h-full">
                         <ImageSlider images = {product.images}/>
                         </div>
                         <div className="w-[65%] h-full p-4">
-                            <h1 className="text-3xl font-bold text-accent">{product.productName}</h1>
+                            <h1 className="text-3xl font-bold text-accent hidden lg:block">{product.productName}</h1>
                             <h1 className="text-3xl font-bold text-gray-500">{product.altNames.join(" | ")}</h1>
-                            <p className="text-xl text-accent">{(product.price>product.lastPrice)&&<span className="line-through text-red-500">LKR{product.price}</span>
+                            <p className="text-xl text-accent hidden lg:block">{(product.price>product.lastPrice)&&<span className="line-through text-red-500">LKR{product.price}</span>
                             }<span>{"LKR"+product.lastPrice}</span></p>
                             <p className="text-xl text-accent line-clamp-3">{product.description}</p>
                             <button onClick={onAddtoCartClick} className="bg-secondary text-accent p-2 rounded-lg">Add to cart</button>
