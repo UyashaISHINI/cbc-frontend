@@ -1,3 +1,4 @@
+import { useGoogleLogin } from "@react-oauth/google";
 import axios, { Axios } from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
@@ -5,6 +6,14 @@ import { Link } from "react-router-dom";
 
 export default function LoginPage() {
 
+    const googleLogin = useGoogleLogin({
+        onSuccess : (res)=>{
+            console.log(res)
+        },
+        onError: (error) => {
+            console.error('Google Login Error:', error);
+        },
+    })
     const [email,setEmail]= useState("Your email")
     const [password,setPassword]=useState("")
 
@@ -41,6 +50,7 @@ export default function LoginPage() {
                     setPassword(e.target.value)
                 }}/>
                 <button onClick={login} className="bg-white">Login</button>
+                <button onClick={()=>{googleLogin()}} className="bg-white">Login with google</button>
             </div>
         </div>
     );
